@@ -6,7 +6,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const postcssPresetEnv = require('postcss-preset-env')
 const WebpackBar = require('webpackbar')
-const { DefinePlugin } = require('webpack')
 
 const { buildPath, templatePath, faviconPath, node_modules, src } = require('./path')
 
@@ -77,7 +76,10 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        use: ['file-loader']
+        loader: 'file-loader',
+        options: {
+          outputPath: 'assets'
+        }
       }
     ]
   },

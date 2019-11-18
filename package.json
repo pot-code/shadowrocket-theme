@@ -64,10 +64,10 @@
   "scripts": {
     "dev": "node bin/dev-server",
     "build": "webpack-cli --config build/webpack.config.dev.js",
-    "build:prod": "webpack-cli --config build/webpack.config.prod.js",
+    "build:prod": "NODE_ENV=production webpack-cli --config build/webpack.config.prod.js",
     "build:clean": "rm -rf public/*",
     "build:ls": "ls -hl public",
-    "publish": "webpack-cli --config build/webpack.config.publish.js",
+    "publish": "NODE_ENV=production webpack-cli --config build/webpack.config.publish.js",
     "lint": "NODE_ENV=development tslint -t codeFrame -p ./ --fix",
     "lint:prod": "NODE_ENV=production tslint -t codeFrame -p ./ --fix",
     "profile": "PROFILE=1 webpack-cli --config build/webpack.config.prod.js",
