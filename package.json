@@ -1,0 +1,104 @@
+{
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-proposal-class-properties": "^7.7.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-typescript": "^7.7.2",
+    "@storybook/addon-actions": "^5.0.11",
+    "@storybook/addon-backgrounds": "^5.0.11",
+    "@storybook/addon-knobs": "^5.0.11",
+    "@storybook/addon-links": "^5.0.11",
+    "@storybook/addons": "^5.0.11",
+    "@storybook/react": "^5.0.11",
+    "@types/classnames": "^2.2.7",
+    "@types/react": "^16.8.13",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-router-dom": "^4.3.2",
+    "@types/react-transition-group": "^2.9.1",
+    "@types/storybook__react": "^4.0.1",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-react-css-modules": "^5.2.6",
+    "boxen": "^3.2.0",
+    "chalk": "^2.4.2",
+    "clean-webpack-plugin": "^2.0.1",
+    "commitizen": "^3.0.7",
+    "common-tags": "^1.8.0",
+    "css-loader": "^2.1.1",
+    "cz-conventional-changelog": "^2.1.0",
+    "express": "^4.16.4",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "happypack": "^5.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^1.3.1",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
+    "lint-staged": "^8.1.5",
+    "portfinder": "^1.0.20",
+    "postcss-less": "^3.1.4",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.6.0",
+    "prettier": "^1.17.0",
+    "pretty-bytes": "^5.2.0",
+    "react-hot-loader": "^4.8.4",
+    "source-map-loader": "^0.2.4",
+    "style-loader": "^0.21.0",
+    "table": "^5.2.3",
+    "ts-loader": "^5.3.3",
+    "tslint": "^5.15.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-loader": "^3.5.4",
+    "tslint-react": "^4.0.0",
+    "typescript": "^3.4.3",
+    "webpack": "^4.30.0",
+    "webpack-bundle-analyzer": "^3.3.2",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-middleware": "^3.6.2",
+    "webpack-dev-server": "^3.3.1",
+    "webpack-hot-middleware": "^2.24.4",
+    "webpack-log": "^2.0.0",
+    "webpack-merge": "^4.2.1",
+    "webpackbar": "^3.1.5"
+  },
+  "scripts": {
+    "dev": "node bin/dev-server",
+    "build": "webpack-cli --config build/webpack.config.dev.js",
+    "build:prod": "webpack-cli --config build/webpack.config.prod.js",
+    "build:clean": "rm -rf public/*",
+    "build:ls": "ls -hl public",
+    "publish": "webpack-cli --config build/webpack.config.publish.js",
+    "lint": "NODE_ENV=development tslint -t codeFrame -p ./ --fix",
+    "lint:prod": "NODE_ENV=production tslint -t codeFrame -p ./ --fix",
+    "profile": "PROFILE=1 webpack-cli --config build/webpack.config.prod.js",
+    "storybook": "start-storybook --ci -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "dependencies": {
+    "@hot-loader/react-dom": "^16.8.6",
+    "classnames": "^2.2.6",
+    "normalize.css": "^8.0.1",
+    "react": "^16.8.6",
+    "react-color": "^2.17.3",
+    "react-dom": "^16.8.6",
+    "react-icons": "^3.8.0",
+    "react-router-dom": "^5.0.0",
+    "react-toastify": "^5.4.1",
+    "react-transition-group": "^4.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{tsx, ts}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

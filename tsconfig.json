@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "jsx": "react",
+    "sourceMap": true,
+    "module": "es6",
+    "moduleResolution": "node",
+    "target": "es6",
+    "lib": [
+      "dom",
+      "es6"
+    ],
+    "allowSyntheticDefaultImports": true,
+    "types": [
+      "node"
+    ],
+    "paths": {
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@stores/*": [
+        "src/store/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*"
+  ]
+}
