@@ -1,18 +1,17 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./",
     "jsx": "react",
     "sourceMap": true,
     "module": "es6",
     "moduleResolution": "node",
     "target": "es6",
+    "typeRoots": [
+      "./src/typings"
+    ],
     "lib": [
       "dom",
       "es6"
-    ],
-    "allowSyntheticDefaultImports": true,
-    "types": [
-      "node"
     ],
     "paths": {
       "@components/*": [
@@ -24,6 +23,6 @@
     }
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
   ]
 }

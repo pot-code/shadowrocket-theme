@@ -74,6 +74,10 @@ module.exports = {
         test: /\.css$/,
         include: [...['react-toastify', 'normalize'].map(module => path.join(node_modules, module)), src],
         use: ['style-loader', 'css-loader', postCSSLoaderConfig]
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['file-loader']
       }
     ]
   },

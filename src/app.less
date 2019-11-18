@@ -49,7 +49,7 @@
       height: 100%;
       width: 100%;
       opacity: 0;
-      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.6);
       transition: opacity 0.6s ease;
     }
 
@@ -250,6 +250,9 @@
     padding: 16px;
     border-radius: 4px;
     background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 
     .export {
       .button {
@@ -260,7 +263,7 @@
         text-align: center;
         width: 50%;
         margin: 24px auto 0;
-        border-radius: 8px;
+        border-radius: 4px;
         transition: background-color 0.3s ease, color 0.3s ease;
         cursor: pointer;
 
@@ -275,7 +278,7 @@
         justify-content: center;
         color: green;
         background-color: #f1f1f1;
-        padding: 4px;
+        padding: 4px 16px;
         border-radius: 4px;
         opacity: 0;
         transition: opacity 0.3s ease;
@@ -284,6 +287,8 @@
           opacity: 1;
         }
       }
+    }
+    .donate {
     }
   }
   .meter {

@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { ChromePicker, ColorResult, ColorChangeHandler } from 'react-color'
-import { IoIosCheckmarkCircleOutline } from 'react-icons/io'
+import { IoIosCheckmarkCircleOutline, IoIosHeart } from 'react-icons/io'
 
 import './app.less'
+import qrcode from './assets/qrcode.png'
 
 function throttle(fn: Function, delay: number = 500, tail: boolean = false): Function {
   let lastInvoked = +new Date()
@@ -19,10 +20,6 @@ function throttle(fn: Function, delay: number = 500, tail: boolean = false): Fun
     }
   }
 }
-
-/* 
-shadowrocket://color?NavigationBarColor=%232473DD&NavigationBar2Color=%234D4D4D&NavigationBarTextColor=%23FFFFFF&NavigationBar2TextColor=%23FFFFFF&TabBarColor=%23E6F5F5F5&TabBarBorderColor=%23E6E6E6&TabBarSelectedColor=%232473BD&TabBarUnselectedColor=%23808080&TableBackgroundColor=%23F5F5F5&TableCellBackgroundColor=%23FFFFFF&TableCellSelectedBackgroundColor=%23E6E6E6&TableSeparatorColor=%23E0E0E0&TextFieldTextColor=%234D4D4D&PlaceholderColor=%23AAAAAA&TextLabelTextColor=%23000000&DetailLabelTextColor=%23808080&TextLabelDeleteColor=%23ED402E&HeaderFooterTextColor=%23808080&SearchFieldBackgroundColor=%23FFFFFF&IndicatorColor=%23808080&ButtonIconColor=%232473BD&ButtonNormalColor=%23FFFFFF&ButtonNormal2Color=%23CCFFFFFF&ButtonNormal3Color=%23808080&ButtonHighlightedColor=%2399FFFFFF&ButtonHighlighted2Color=%23FFFFFF&ButtonHighlighted3Color=%23000000&ButtonDisabledColor=%2380FFFFFF&ButtonDisabled2Color=%2380FFFFFF&PingSuccessTextColor=%2345995E&PingTimeoutTextColor=%23CF5747&DefaultDotColor=%23FF9400&HUDBackgroundColor=%23FFFFFF&v=1.0
- */
 
 const FRAME_RATE = ~~(1000 / 60)
 const PICKER_HEIGHT = 240
@@ -138,7 +135,7 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
             'TableCellBackgroundColor',
             'TextLabelTextColor',
             'DetaillLabelTextColor',
-            'ButtonlconColor',
+            'ButtonIconColor',
             'ButtonNormalColor',
             'PingSuccessTextColor',
             'PingTimeoutTextColor',
@@ -161,6 +158,23 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
               <IoIosCheckmarkCircleOutline />
               <span style={{ marginLeft: '8px' }}>导出到剪切板</span>
             </p>
+          </div>
+          <div styleName="donate">
+            <p
+              style={{
+                marginTop: '0',
+                textAlign: 'center',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#FF5722'
+              }}
+            >
+              <IoIosHeart style={{ transform: 'rotateZ(-30deg)' }} />
+              <span style={{ margin: '0 8px' }}>请随意捐赠</span>
+              <IoIosHeart style={{ transform: 'rotateZ(30deg)' }} />
+            </p>
+            <img src={qrcode} style={{ width: '233px' }} />
           </div>
         </div>
       </div>
