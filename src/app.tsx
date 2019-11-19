@@ -9,7 +9,7 @@ import { throttle } from './util'
 import './app.less'
 
 const STORAGE_KEY = 'sr_scheme'
-const SAVE_INTERVAL = 1e3 * 10 // 10s
+const SAVE_INTERVAL = 1e3 * 3 // 10s
 
 const defaultScheme = {
   NavigationBarColor: '#1D74BE',
@@ -52,11 +52,14 @@ function App() {
   const [scheme, setScheme] = React.useState(() => {
     const savedScheme = localStorage.getItem(STORAGE_KEY)
 
-    console.log('init')
     if (savedScheme) {
       return JSON.parse(savedScheme)
     }
     return defaultScheme
+  })
+
+  React.useEffect(() => {
+    saveSchemeToLocalStorage(scheme)
   })
 
   return (

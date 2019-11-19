@@ -29,8 +29,8 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
     super(props)
 
     this.state = {
-      currentColor: '',
-      currentLabel: '',
+      currentColor: props.scheme.NavigationBarColor,
+      currentLabel: 'NavigationBarColor',
       showTips: false,
       result: ''
     }
