@@ -8,7 +8,6 @@ import './app.less'
 import qrcode from './assets/qrcode.png'
 
 const FRAME_RATE = ~~(1000 / 60)
-const PICKER_HEIGHT = 240
 const EXPORT_PREFIX = 'shadowrocket://color?'
 const EXPORT_SUFFIX = '&v=1.0'
 
@@ -135,12 +134,12 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#FF5722'
+                color: '#BCF8FF'
               }}
             >
-              <IoIosHeart style={{ transform: 'rotateZ(-30deg)' }} />
-              <span style={{ margin: '0 8px' }}>请随意捐赠</span>
-              <IoIosHeart style={{ transform: 'rotateZ(30deg)' }} />
+              <IoIosHeart />
+              <span style={{ margin: '0 8px', fontWeight: 700 }}>请随意捐赠</span>
+              <IoIosHeart />
             </p>
             <img src={qrcode} style={{ width: '233px', height: '233.66px' }} />
           </div>

@@ -1,10 +1,25 @@
 @import (css) url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
+@sizes: {
+  mobile: 320px;
+  tablet: 768px;
+  desktop: 1024px;
+};
+
 .app {
   display: flex;
   flex-direction: row;
   width: 80%;
   margin: auto;
+}
+
+.mobile-tip {
+  display: none;
+  background-color: #ffffff;
+  margin: 8px;
+  padding: 4px;
+  border-radius: 4px;
+  color: #de5a25;
 }
 
 .homescreen {
@@ -254,7 +269,7 @@
   .sidebar {
     flex-shrink: 0;
     padding: 16px;
-    border-radius: 4px;
+    border-radius: 8px;
     background-color: rgba(63, 81, 181, 0.29);
     display: flex;
     align-items: center;
@@ -291,7 +306,7 @@
         }
         &.warning {
           background-color: #f1d040;
-          color: #0e5d18;
+          color: #008e12;
         }
         &.warning:hover {
           background-color: darken(#f1d040, 10%);
@@ -338,10 +353,9 @@
     &.selected {
       right: 24px;
 
-      // .label {
-      //   color: #ffffff;
-      //   background-color: #2f2f2f;
-      // }
+      .label {
+        color: #333333;
+      }
       animation: wiggle 6s linear infinite;
     }
     &.selected::after {
@@ -365,18 +379,12 @@
     }
     .label {
       user-select: none;
-      color: #333333;
+      color: #8c8c8c;
       margin-right: 16px;
       font-size: 14px;
-      // display: inline-block;
-      // border: 1px solid lightgray;
-      // border-radius: 3px;
-      // padding: 1px 4px;
-      // transition: background-color 0.3s ease, color 0.3s ease;
-      // background-color: transparent;
+      font-weight: 700;
     }
     .indicator {
-      // width: 20%;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -394,5 +402,31 @@
         color: #000000;
       }
     }
+  }
+}
+
+@media (max-width: @sizes[tablet]) {
+  .app {
+    flex-direction: column;
+    width: 100%;
+  }
+  .mobile-tip {
+    display: block;
+  }
+  .panels {
+    flex-direction: column;
+    margin-top: 16px;
+
+    .sidebar {
+      margin-top: 16px;
+      width: 90%;
+    }
+    .meters {
+      margin-right: 0;
+      width: 80%;
+    }
+  }
+  .homescreen {
+    margin-top: 16px;
   }
 }
