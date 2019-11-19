@@ -49,20 +49,14 @@ function MobileTip() {
 }
 
 function App() {
-  const [scheme, setScheme] = React.useState(defaultScheme)
-  const [first, invalidate] = React.useState(true)
-
-  React.useEffect(() => {
+  const [scheme, setScheme] = React.useState(() => {
     const savedScheme = localStorage.getItem(STORAGE_KEY)
 
-    if (savedScheme && first) {
-      setTimeout(() => {
-        setScheme(JSON.parse(savedScheme))
-        invalidate(false)
-      }, 0)
-    } else {
-      saveSchemeToLocalStorage(scheme)
+    console.log('init')
+    if (savedScheme) {
+      return JSON.parse(savedScheme)
     }
+    return defaultScheme
   })
 
   return (
