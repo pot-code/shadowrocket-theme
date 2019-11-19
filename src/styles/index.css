@@ -1,5 +1,6 @@
 /* global css rules */
 body {
+  font-family: 'PingFang SC', 'tahoma', 'Microsoft Yahei', 'helvetica', 'sans-serif';
   height: 100vh;
   display: flex;
   flex-direction: column;

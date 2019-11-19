@@ -2,24 +2,10 @@ import * as React from 'react'
 import { ChromePicker, ColorResult, ColorChangeHandler } from 'react-color'
 import { IoIosCheckmarkCircleOutline, IoIosHeart } from 'react-icons/io'
 
+import { throttle } from './util'
+
 import './app.less'
 import qrcode from './assets/qrcode.png'
-
-function throttle(fn: Function, delay: number = 500, tail: boolean = false): Function {
-  let lastInvoked = +new Date()
-  let tailTimeout: number | undefined
-
-  return function(...args: any) {
-    const invokingTime = +new Date()
-    if (invokingTime - lastInvoked > delay) {
-      fn(...args)
-      lastInvoked = invokingTime
-    } else if (tail) {
-      clearTimeout(tailTimeout)
-      tailTimeout = setTimeout(fn, Math.max(invokingTime - lastInvoked, 4), ...args)
-    }
-  }
-}
 
 const FRAME_RATE = ~~(1000 / 60)
 const PICKER_HEIGHT = 240
@@ -174,7 +160,7 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
               <span style={{ margin: '0 8px' }}>请随意捐赠</span>
               <IoIosHeart style={{ transform: 'rotateZ(30deg)' }} />
             </p>
-            <img src={qrcode} style={{ width: '233px' }} />
+            <img src={qrcode} style={{ width: '233px', height: '233.66px' }} />
           </div>
         </div>
       </div>

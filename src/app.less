@@ -1,3 +1,5 @@
+@import (css) url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
 .app {
   display: flex;
   flex-direction: row;
@@ -48,7 +50,7 @@
       display: block;
       height: 100%;
       width: 100%;
-      opacity: 0;
+      opacity: 0.5;
       box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.6);
       transition: opacity 0.6s ease;
     }
@@ -243,13 +245,17 @@
   align-items: center;
 
   .meters {
+    font-family: 'Roboto', 'PingFang SC', 'tahoma', 'Microsoft Yahei', 'helvetica', 'sans-serif';
     margin-right: 32px;
+    padding: 14px;
+    background-color: rgba(255, 255, 255, 0.33);
+    border-radius: 8px;
   }
   .sidebar {
     flex-shrink: 0;
     padding: 16px;
     border-radius: 4px;
-    background-color: #ffffff;
+    background-color: rgba(63, 81, 181, 0.29);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -258,7 +264,7 @@
       .button {
         line-height: 24px;
         padding: 4px 8px;
-        background-color: #2196f3;
+        background-color: #4fb0fd;
         color: #f5feff;
         text-align: center;
         width: 50%;
@@ -268,7 +274,7 @@
         cursor: pointer;
 
         &:hover {
-          background-color: darken(#2196f3, 10%);
+          background-color: darken(#4fb0fd, 10%);
         }
       }
       .tips {
@@ -332,7 +338,7 @@
     }
     .label {
       user-select: none;
-      color: #224758;
+      color: #333333;
       margin-right: 16px;
       font-size: 14px;
       // display: inline-block;
