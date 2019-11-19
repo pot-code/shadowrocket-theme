@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { ChromePicker, ColorResult, ColorChangeHandler } from 'react-color'
-import { IoIosCheckmarkCircleOutline, IoIosHeart } from 'react-icons/io'
+import { IoIosCheckmarkCircleOutline, IoIosHeart, IoMdClipboard, IoIosRefresh } from 'react-icons/io'
 
 import { throttle } from './util'
 
@@ -15,6 +15,7 @@ const EXPORT_SUFFIX = '&v=1.0'
 interface IControlPanelProps {
   scheme: { [key: string]: string }
   setScheme: Function
+  resetScheme: Function
 }
 
 interface IControlPanelState {
@@ -138,13 +139,20 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
         </div>
         <div styleName="sidebar">
           <ChromePicker color={currentColor} onChange={this.onPickerColorChange} />
-          <div styleName="export" onClick={this.handleExport} onCopy={this.handleExportCopy}>
-            <div styleName="button">导出</div>
-            <p styleName={'tips' + (showTips ? ' show' : '')}>
-              <IoIosCheckmarkCircleOutline />
-              <span style={{ marginLeft: '8px' }}>导出到剪切板</span>
-            </p>
+          <div styleName="export">
+            <div styleName="button" onClick={this.handleExport} onCopy={this.handleExportCopy}>
+              <IoMdClipboard />
+              <span styleName="label">导出</span>
+            </div>
+            <div styleName="button warning" onClick={this.props.resetScheme as React.MouseEventHandler}>
+              <IoIosRefresh />
+              <span styleName="label">重置</span>
+            </div>
           </div>
+          <p styleName={'tips' + (showTips ? ' show' : '')}>
+            <IoIosCheckmarkCircleOutline />
+            <span style={{ marginLeft: '8px' }}>导出到剪切板</span>
+          </p>
           <div styleName="donate">
             <p
               style={{

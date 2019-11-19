@@ -56,7 +56,7 @@ function App() {
   return (
     <div styleName="app">
       <HomeScreen scheme={scheme} />
-      <ControlPanel scheme={scheme} setScheme={setScheme} />
+      <ControlPanel scheme={scheme} setScheme={setScheme} resetScheme={() => setScheme(defaultScheme)} />
       {/* <ToastContainer /> */}
     </div>
   )

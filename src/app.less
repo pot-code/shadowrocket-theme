@@ -261,37 +261,61 @@
     flex-direction: column;
 
     .export {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+
       .button {
         line-height: 24px;
-        padding: 4px 8px;
+        padding: 4px 16px;
         background-color: #4fb0fd;
         color: #f5feff;
         text-align: center;
-        width: 50%;
         margin: 24px auto 0;
         border-radius: 4px;
-        transition: background-color 0.3s ease, color 0.3s ease;
+        transition: background-color 0.3s ease, color 0.3s ease, top 0.3s ease;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        position: relative;
+        top: 0;
+        user-select: none;
 
         &:hover {
           background-color: darken(#4fb0fd, 10%);
         }
-      }
-      .tips {
-        display: flex;
-        align-items: center;
-        margin: 8px 0;
-        justify-content: center;
-        color: green;
-        background-color: #f1f1f1;
-        padding: 4px 16px;
-        border-radius: 4px;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-
-        &.show {
-          opacity: 1;
+        &:active {
+          background-color: darken(#4fb0fd, 20%);
         }
+        &.warning {
+          background-color: #f1d040;
+        }
+        &.warning:hover {
+          background-color: darken(#f1d040, 10%);
+        }
+        &.warning:active {
+          background-color: darken(#f1d040, 20%);
+        }
+
+        .label {
+          margin-left: 2px;
+        }
+      }
+    }
+    .tips {
+      display: flex;
+      align-items: center;
+      margin: 8px 0;
+      justify-content: center;
+      color: green;
+      background-color: #f1f1f1;
+      padding: 4px 16px;
+      border-radius: 4px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+
+      &.show {
+        opacity: 1;
       }
     }
     .donate {
