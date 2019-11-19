@@ -19,11 +19,8 @@ interface IControlPanelProps {
 }
 
 interface IControlPanelState {
-  displayColorPicker: boolean
   currentColor: string
   currentLabel: string
-  pickerX: number
-  pickerY: number
   showTips: boolean
   result: string
 }
@@ -33,38 +30,15 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
     super(props)
 
     this.state = {
-      displayColorPicker: false,
       currentColor: '',
       currentLabel: '',
-      pickerX: 0,
-      pickerY: 0,
       showTips: false,
       result: ''
     }
   }
 
-  hideColorPicker = () => {
-    this.setState({ displayColorPicker: false })
-  }
-
   activateColorPicker = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, defaultColor: string, label: string) => {
-    const { innerHeight } = window
-    const {
-      clientY,
-      clientX,
-      currentTarget: { offsetHeight },
-      nativeEvent: { offsetX, offsetY }
-    } = event
-
-    let pickerX: number, pickerY: number
-
-    pickerX = clientX - offsetX
-    pickerY = clientY - offsetY + offsetHeight + 8
-    if (pickerY + PICKER_HEIGHT > innerHeight) {
-      pickerY = clientY - offsetY - PICKER_HEIGHT - 8
-    }
-
-    this.setState({ displayColorPicker: true, currentColor: defaultColor, currentLabel: label, pickerX, pickerY })
+    this.setState({ currentColor: defaultColor, currentLabel: label })
   }
 
   onPickerColorChange = throttle(
