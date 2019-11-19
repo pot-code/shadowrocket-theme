@@ -1,25 +1,11 @@
 import * as React from 'react'
 import { ChromePicker, ColorResult, ColorChangeHandler } from 'react-color'
-import { IoIosCheckmarkCircleOutline, IoIosHeart } from 'react-icons/io'
+import { IoIosCheckmarkCircleOutline, IoIosHeart, IoMdClipboard, IoIosRefresh } from 'react-icons/io'
+
+import { throttle } from './util'
 
 import './app.less'
 import qrcode from './assets/qrcode.png'
-
-function throttle(fn: Function, delay: number = 500, tail: boolean = false): Function {
-  let lastInvoked = +new Date()
-  let tailTimeout: number | undefined
-
-  return function(...args: any) {
-    const invokingTime = +new Date()
-    if (invokingTime - lastInvoked > delay) {
-      fn(...args)
-      lastInvoked = invokingTime
-    } else if (tail) {
-      clearTimeout(tailTimeout)
-      tailTimeout = setTimeout(fn, Math.max(invokingTime - lastInvoked, 4), ...args)
-    }
-  }
-}
 
 const FRAME_RATE = ~~(1000 / 60)
 const PICKER_HEIGHT = 240
@@ -29,14 +15,12 @@ const EXPORT_SUFFIX = '&v=1.0'
 interface IControlPanelProps {
   scheme: { [key: string]: string }
   setScheme: Function
+  resetScheme: Function
 }
 
 interface IControlPanelState {
-  displayColorPicker: boolean
   currentColor: string
   currentLabel: string
-  pickerX: number
-  pickerY: number
   showTips: boolean
   result: string
 }
@@ -46,38 +30,15 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
     super(props)
 
     this.state = {
-      displayColorPicker: false,
       currentColor: '',
       currentLabel: '',
-      pickerX: 0,
-      pickerY: 0,
       showTips: false,
       result: ''
     }
   }
 
-  hideColorPicker = () => {
-    this.setState({ displayColorPicker: false })
-  }
-
   activateColorPicker = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, defaultColor: string, label: string) => {
-    const { innerHeight } = window
-    const {
-      clientY,
-      clientX,
-      currentTarget: { offsetHeight },
-      nativeEvent: { offsetX, offsetY }
-    } = event
-
-    let pickerX: number, pickerY: number
-
-    pickerX = clientX - offsetX
-    pickerY = clientY - offsetY + offsetHeight + 8
-    if (pickerY + PICKER_HEIGHT > innerHeight) {
-      pickerY = clientY - offsetY - PICKER_HEIGHT - 8
-    }
-
-    this.setState({ displayColorPicker: true, currentColor: defaultColor, currentLabel: label, pickerX, pickerY })
+    this.setState({ currentColor: defaultColor, currentLabel: label })
   }
 
   onPickerColorChange = throttle(
@@ -107,7 +68,7 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
     })
   }
 
-  handleExportCopy = (e: React.ClipboardEvent<HTMLDivElement>) => {
+  handleExportCopy = (e: React.ClipboardEvent) => {
     // important
     e.preventDefault()
     const { result } = this.state
@@ -152,13 +113,20 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
         </div>
         <div styleName="sidebar">
           <ChromePicker color={currentColor} onChange={this.onPickerColorChange} />
-          <div styleName="export" onClick={this.handleExport} onCopy={this.handleExportCopy}>
-            <div styleName="button">导出</div>
-            <p styleName={'tips' + (showTips ? ' show' : '')}>
-              <IoIosCheckmarkCircleOutline />
-              <span style={{ marginLeft: '8px' }}>导出到剪切板</span>
-            </p>
+          <div styleName="export">
+            <a styleName="button" onClick={this.handleExport} onCopy={this.handleExportCopy}>
+              <IoMdClipboard />
+              <span styleName="label">导出</span>
+            </a>
+            <a styleName="button warning" onClick={this.props.resetScheme as React.MouseEventHandler}>
+              <IoIosRefresh />
+              <span styleName="label">重置</span>
+            </a>
           </div>
+          <p styleName={'tips' + (showTips ? ' show' : '')}>
+            <IoIosCheckmarkCircleOutline />
+            <span style={{ marginLeft: '8px' }}>导出到剪切板</span>
+          </p>
           <div styleName="donate">
             <p
               style={{
@@ -174,7 +142,7 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
               <span style={{ margin: '0 8px' }}>请随意捐赠</span>
               <IoIosHeart style={{ transform: 'rotateZ(30deg)' }} />
             </p>
-            <img src={qrcode} style={{ width: '233px' }} />
+            <img src={qrcode} style={{ width: '233px', height: '233.66px' }} />
           </div>
         </div>
       </div>
