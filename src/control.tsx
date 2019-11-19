@@ -68,7 +68,7 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
     })
   }
 
-  handleExportCopy = (e: React.ClipboardEvent<HTMLDivElement>) => {
+  handleExportCopy = (e: React.ClipboardEvent) => {
     // important
     e.preventDefault()
     const { result } = this.state
@@ -114,14 +114,14 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
         <div styleName="sidebar">
           <ChromePicker color={currentColor} onChange={this.onPickerColorChange} />
           <div styleName="export">
-            <div styleName="button" onClick={this.handleExport} onCopy={this.handleExportCopy}>
+            <a styleName="button" onClick={this.handleExport} onCopy={this.handleExportCopy}>
               <IoMdClipboard />
               <span styleName="label">导出</span>
-            </div>
-            <div styleName="button warning" onClick={this.props.resetScheme as React.MouseEventHandler}>
+            </a>
+            <a styleName="button warning" onClick={this.props.resetScheme as React.MouseEventHandler}>
               <IoIosRefresh />
               <span styleName="label">重置</span>
-            </div>
+            </a>
           </div>
           <p styleName={'tips' + (showTips ? ' show' : '')}>
             <IoIosCheckmarkCircleOutline />
