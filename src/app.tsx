@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { hot } from 'react-hot-loader/root'
+import { GiInfo } from 'react-icons/gi'
 
 import { ControlPanel } from './control'
 import { HomeScreen } from './homescreen'
@@ -8,7 +9,7 @@ import { throttle } from './util'
 import './app.less'
 
 const STORAGE_KEY = 'sr_scheme'
-const SAVE_INTERVAL = 1e3 * 10 // 10s
+const SAVE_INTERVAL = 1e3 * 3 // 10s
 
 const defaultScheme = {
   NavigationBarColor: '#1D74BE',
@@ -36,25 +37,34 @@ const saveSchemeToLocalStorage = throttle(
   true
 )
 
-function App() {
-  const [scheme, setScheme] = React.useState(defaultScheme)
-  const [first, invalidate] = React.useState(true)
+function MobileTip() {
+  return (
+    <p styleName="mobile-tip">
+      <GiInfo />
+      <span style={{ verticalAlign: 'top', marginLeft: '4px' }}>
+        虽然本页面提供了手机端适配，但是功能可能不正常，建议您切换到 PC 端使用
+      </span>
+    </p>
+  )
+}
 
-  React.useEffect(() => {
+function App() {
+  const [scheme, setScheme] = React.useState(() => {
     const savedScheme = localStorage.getItem(STORAGE_KEY)
 
-    if (savedScheme && first) {
-      setTimeout(() => {
-        setScheme(JSON.parse(savedScheme))
-        invalidate(false)
-      }, 0)
-    } else {
-      saveSchemeToLocalStorage(scheme)
+    if (savedScheme) {
+      return JSON.parse(savedScheme)
     }
+    return defaultScheme
+  })
+
+  React.useEffect(() => {
+    saveSchemeToLocalStorage(scheme)
   })
 
   return (
     <div styleName="app">
+      <MobileTip />
       <HomeScreen scheme={scheme} />
       <ControlPanel scheme={scheme} setScheme={setScheme} resetScheme={() => setScheme(defaultScheme)} />
       {/* <ToastContainer /> */}
