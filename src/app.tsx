@@ -41,7 +41,7 @@ function MobileTip() {
   return (
     <p styleName="mobile-tip">
       <GiInfo />
-      <span style={{ verticalAlign: 'top' }}>
+      <span style={{ verticalAlign: 'top', marginLeft: '4px' }}>
         虽然本页面提供了手机端适配，但是功能可能不正常，建议您切换到 PC 端使用
       </span>
     </p>
