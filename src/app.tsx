@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { hot } from 'react-hot-loader/root'
+import { GiInfo } from 'react-icons/gi'
 
 import { ControlPanel } from './control'
 import { HomeScreen } from './homescreen'
@@ -36,6 +37,17 @@ const saveSchemeToLocalStorage = throttle(
   true
 )
 
+function MobileTip() {
+  return (
+    <p styleName="mobile-tip">
+      <GiInfo />
+      <span style={{ verticalAlign: 'top' }}>
+        虽然本页面提供了手机端适配，但是功能可能不正常，建议您切换到 PC 端使用
+      </span>
+    </p>
+  )
+}
+
 function App() {
   const [scheme, setScheme] = React.useState(defaultScheme)
   const [first, invalidate] = React.useState(true)
@@ -55,6 +67,7 @@ function App() {
 
   return (
     <div styleName="app">
+      <MobileTip />
       <HomeScreen scheme={scheme} />
       <ControlPanel scheme={scheme} setScheme={setScheme} resetScheme={() => setScheme(defaultScheme)} />
       {/* <ToastContainer /> */}
