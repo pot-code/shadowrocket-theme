@@ -101,13 +101,13 @@ const Actions: React.FunctionComponent<{
   <div styleName="actions">
     <TableCell icon={<IoIosRocket color={props.ButtonIconColor} />} color={props.TableCellBackgroundColor}>
       <div styleName="connection">
-        <span>已连接</span>
+        <span style={{ color: props.TextLabelTextColor }}>已连接</span>
         <div styleName="toggle" style={{ backgroundColor: props.ButtonIconColor }}></div>
       </div>
     </TableCell>
     <TableCell icon={<GiShipWheel color={props.ButtonIconColor} />} color={props.TableCellBackgroundColor}>
       <div styleName="router">
-        <span>全局路由</span>
+        <span style={{ color: props.TextLabelTextColor }}>全局路由</span>
         <div styleName="config" style={{ color: props.DetaillLabelTextColor }}>
           <span style={{ marginRight: '4px' }}>配置</span>
           <FiChevronRight />
@@ -115,7 +115,7 @@ const Actions: React.FunctionComponent<{
       </div>
     </TableCell>
     <TableCell icon={<GiSpeedometer color={props.ButtonIconColor} />} color={props.TableCellBackgroundColor}>
-      延迟测试
+      <span style={{ color: props.TextLabelTextColor }}>延迟测试</span>
     </TableCell>
   </div>
 )
