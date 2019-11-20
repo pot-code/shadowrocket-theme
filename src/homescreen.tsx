@@ -6,6 +6,13 @@ import { FiChevronRight } from 'react-icons/fi'
 
 import './app.less'
 
+const SERVERS = [
+  ['Timeout', '超时'],
+  ['JMS-79372', '266ms'],
+  ['Bandwagon', '279ms'],
+  ['Vultr', '23ms']
+]
+
 export const HomeScreen: React.FunctionComponent<{ scheme: { [key: string]: string } }> = props => {
   const {
     NavigationBarColor,
@@ -50,18 +57,25 @@ export const HomeScreen: React.FunctionComponent<{ scheme: { [key: string]: stri
             <div styleName="label">
               <span>服务器节点</span>
             </div>
-            <Servers
-              {...{
-                ButtonIconColor,
-                TextLabelTextColor,
-                DetaillLabelTextColor,
-                PingSuccessTextColor,
-                PingTimeoutTextColor,
-                DefaultDotColor,
-                TableCellBackgroundColor,
-                TableSeparatorColor
-              }}
-            />
+            <div styleName="servers">
+              {SERVERS.map((val, index) => (
+                <Server
+                  delay={val[1]}
+                  key={val[0]}
+                  {...{
+                    ButtonIconColor,
+                    TextLabelTextColor,
+                    DetaillLabelTextColor,
+                    TableCellBackgroundColor,
+                    TableSeparatorColor,
+                    DefaultDotColor
+                  }}
+                  PingColor={val[1] === '超时' ? PingTimeoutTextColor : PingSuccessTextColor}
+                  address={val[0]}
+                  selected={index == 0}
+                />
+              ))}
+            </div>
           </div>
           <p styleName="tip">圆点代表默认节点</p>
         </div>
@@ -136,63 +150,15 @@ const Actions: React.FunctionComponent<{
   </div>
 )
 
-const Servers: React.FunctionComponent<{
+const Server: React.FunctionComponent<{
+  delay: string
   ButtonIconColor: string
   TextLabelTextColor: string
   DetaillLabelTextColor: string
-  PingSuccessTextColor: string
-  PingTimeoutTextColor: string
+  PingColor: string
   TableCellBackgroundColor: string
   TableSeparatorColor: string
   DefaultDotColor: string
-}> = props => (
-  <div styleName="servers">
-    <Server
-      delay="超时"
-      pingColor={props.PingTimeoutTextColor}
-      labelColor={props.TextLabelTextColor}
-      tableCellColor={props.TableCellBackgroundColor}
-      tableCellSeparatorColor={props.TableSeparatorColor}
-      detailColor={props.DetaillLabelTextColor}
-      iconColor={props.ButtonIconColor}
-      address="timeout"
-      selected
-      dotColor={props.DefaultDotColor}
-    />
-    <Server
-      delay="266ms"
-      pingColor={props.PingSuccessTextColor}
-      labelColor={props.TextLabelTextColor}
-      detailColor={props.DetaillLabelTextColor}
-      tableCellColor={props.TableCellBackgroundColor}
-      tableCellSeparatorColor={props.TableSeparatorColor}
-      iconColor={props.ButtonIconColor}
-      address="JMS-79372"
-      dotColor={props.DefaultDotColor}
-    />
-    <Server
-      delay="279ms"
-      pingColor={props.PingSuccessTextColor}
-      labelColor={props.TextLabelTextColor}
-      detailColor={props.DetaillLabelTextColor}
-      tableCellColor={props.TableCellBackgroundColor}
-      tableCellSeparatorColor={props.TableSeparatorColor}
-      iconColor={props.ButtonIconColor}
-      address="bwg"
-      dotColor={props.DefaultDotColor}
-    />
-  </div>
-)
-
-const Server: React.FunctionComponent<{
-  delay: string
-  pingColor: string
-  labelColor: string
-  detailColor: string
-  tableCellColor: string
-  tableCellSeparatorColor: string
-  iconColor: string
-  dotColor: string
   address: string
   selected?: boolean
 }> = props => {
@@ -204,7 +170,7 @@ const Server: React.FunctionComponent<{
         <div
           styleName="dot"
           style={{
-            backgroundColor: props.dotColor
+            backgroundColor: props.DefaultDotColor
           }}
         />
         <div
@@ -214,21 +180,21 @@ const Server: React.FunctionComponent<{
     )
   }
   return (
-    <TableCell icon={icon} color={props.tableCellColor} borderColor={props.tableCellSeparatorColor}>
+    <TableCell icon={icon} color={props.TableCellBackgroundColor} borderColor={props.TableSeparatorColor}>
       <div styleName="server">
         <div styleName="host">
-          <p styleName="address" style={{ color: props.labelColor }}>
+          <p styleName="address" style={{ color: props.TextLabelTextColor }}>
             {props.address}
           </p>
-          <p styleName="type" style={{ color: props.detailColor }}>
+          <p styleName="type" style={{ color: props.DetaillLabelTextColor }}>
             shadowsocks
           </p>
         </div>
         <div styleName="status">
-          <span styleName="delay" style={{ color: props.pingColor }}>
+          <span styleName="delay" style={{ color: props.PingColor }}>
             {props.delay}
           </span>
-          <GiInfo color={props.iconColor} fontSize="24px" />
+          <GiInfo color={props.ButtonIconColor} fontSize="24px" />
         </div>
       </div>
     </TableCell>
