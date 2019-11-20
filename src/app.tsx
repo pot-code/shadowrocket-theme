@@ -20,6 +20,7 @@ const defaultScheme = {
   TabBarUnselectedColor: '#828282',
   TableBackgroundColor: '#F5F5F5',
   TableCellBackgroundColor: '#FFFFFF',
+  TableSeparatorColor: '#E0E0E0',
   TextLabelTextColor: '#000000',
   DetaillLabelTextColor: '#C9C9C9',
   ButtonIconColor: '#1D74BE',
@@ -53,7 +54,11 @@ function App() {
     const savedScheme = localStorage.getItem(STORAGE_KEY)
 
     if (savedScheme) {
-      return JSON.parse(savedScheme)
+      const parsedScheme = JSON.parse(savedScheme)
+
+      if (Object.keys(parsedScheme).length >= Object.keys(defaultScheme).length) {
+        return parsedScheme
+      }
     }
     return defaultScheme
   })

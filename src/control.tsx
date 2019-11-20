@@ -85,23 +85,7 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
     return (
       <div styleName="panels">
         <div styleName="meters">
-          {[
-            'NavigationBarColor',
-            'NavigationBarTextColor',
-            'TabBarColor',
-            'TabBarBorderColor',
-            'TabBarSelectedColor',
-            'TabBarUnselectedColor',
-            'TableBackgroundColor',
-            'TableCellBackgroundColor',
-            'TextLabelTextColor',
-            'DetaillLabelTextColor',
-            'ButtonIconColor',
-            'ButtonNormalColor',
-            'PingSuccessTextColor',
-            'PingTimeoutTextColor',
-            'DefaultDotColor'
-          ].map(field => (
+          {Object.keys(scheme).map(field => (
             <ColorMeter
               field={field}
               key={field}

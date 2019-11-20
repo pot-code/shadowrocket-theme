@@ -14,6 +14,7 @@ export const HomeScreen: React.FunctionComponent<{ scheme: { [key: string]: stri
     TabBarBorderColor,
     TabBarSelectedColor,
     TabBarUnselectedColor,
+    TableSeparatorColor,
     TableBackgroundColor,
     TableCellBackgroundColor,
     TextLabelTextColor,
@@ -41,7 +42,8 @@ export const HomeScreen: React.FunctionComponent<{ scheme: { [key: string]: stri
               ButtonIconColor,
               TextLabelTextColor,
               DetaillLabelTextColor,
-              TableCellBackgroundColor
+              TableCellBackgroundColor,
+              TableSeparatorColor
             }}
           />
           <div styleName="section">
@@ -56,7 +58,8 @@ export const HomeScreen: React.FunctionComponent<{ scheme: { [key: string]: stri
                 PingSuccessTextColor,
                 PingTimeoutTextColor,
                 DefaultDotColor,
-                TableCellBackgroundColor
+                TableCellBackgroundColor,
+                TableSeparatorColor
               }}
             />
           </div>
@@ -96,16 +99,25 @@ const Actions: React.FunctionComponent<{
   ButtonIconColor: string
   TextLabelTextColor: string
   DetaillLabelTextColor: string
+  TableSeparatorColor: string
   TableCellBackgroundColor: string
 }> = props => (
   <div styleName="actions">
-    <TableCell icon={<IoIosRocket color={props.ButtonIconColor} />} color={props.TableCellBackgroundColor}>
+    <TableCell
+      icon={<IoIosRocket color={props.ButtonIconColor} />}
+      color={props.TableCellBackgroundColor}
+      borderColor={props.TableSeparatorColor}
+    >
       <div styleName="connection">
         <span style={{ color: props.TextLabelTextColor }}>已连接</span>
         <div styleName="toggle" style={{ backgroundColor: props.ButtonIconColor }}></div>
       </div>
     </TableCell>
-    <TableCell icon={<GiShipWheel color={props.ButtonIconColor} />} color={props.TableCellBackgroundColor}>
+    <TableCell
+      icon={<GiShipWheel color={props.ButtonIconColor} />}
+      color={props.TableCellBackgroundColor}
+      borderColor={props.TableSeparatorColor}
+    >
       <div styleName="router">
         <span style={{ color: props.TextLabelTextColor }}>全局路由</span>
         <div styleName="config" style={{ color: props.DetaillLabelTextColor }}>
@@ -114,7 +126,11 @@ const Actions: React.FunctionComponent<{
         </div>
       </div>
     </TableCell>
-    <TableCell icon={<GiSpeedometer color={props.ButtonIconColor} />} color={props.TableCellBackgroundColor}>
+    <TableCell
+      icon={<GiSpeedometer color={props.ButtonIconColor} />}
+      color={props.TableCellBackgroundColor}
+      borderColor={props.TableSeparatorColor}
+    >
       <span style={{ color: props.TextLabelTextColor }}>延迟测试</span>
     </TableCell>
   </div>
@@ -127,6 +143,7 @@ const Servers: React.FunctionComponent<{
   PingSuccessTextColor: string
   PingTimeoutTextColor: string
   TableCellBackgroundColor: string
+  TableSeparatorColor: string
   DefaultDotColor: string
 }> = props => (
   <div styleName="servers">
@@ -135,6 +152,7 @@ const Servers: React.FunctionComponent<{
       pingColor={props.PingTimeoutTextColor}
       labelColor={props.TextLabelTextColor}
       tableCellColor={props.TableCellBackgroundColor}
+      tableCellSeparatorColor={props.TableSeparatorColor}
       detailColor={props.DetaillLabelTextColor}
       iconColor={props.ButtonIconColor}
       address="timeout"
@@ -147,6 +165,7 @@ const Servers: React.FunctionComponent<{
       labelColor={props.TextLabelTextColor}
       detailColor={props.DetaillLabelTextColor}
       tableCellColor={props.TableCellBackgroundColor}
+      tableCellSeparatorColor={props.TableSeparatorColor}
       iconColor={props.ButtonIconColor}
       address="JMS-79372"
       dotColor={props.DefaultDotColor}
@@ -157,6 +176,7 @@ const Servers: React.FunctionComponent<{
       labelColor={props.TextLabelTextColor}
       detailColor={props.DetaillLabelTextColor}
       tableCellColor={props.TableCellBackgroundColor}
+      tableCellSeparatorColor={props.TableSeparatorColor}
       iconColor={props.ButtonIconColor}
       address="bwg"
       dotColor={props.DefaultDotColor}
@@ -170,6 +190,7 @@ const Server: React.FunctionComponent<{
   labelColor: string
   detailColor: string
   tableCellColor: string
+  tableCellSeparatorColor: string
   iconColor: string
   dotColor: string
   address: string
@@ -193,7 +214,7 @@ const Server: React.FunctionComponent<{
     )
   }
   return (
-    <TableCell icon={icon} color={props.tableCellColor}>
+    <TableCell icon={icon} color={props.tableCellColor} borderColor={props.tableCellSeparatorColor}>
       <div styleName="server">
         <div styleName="host">
           <p styleName="address" style={{ color: props.labelColor }}>
@@ -238,9 +259,15 @@ const TabBarButton: React.FunctionComponent<{ icon: React.ReactElement; text: st
   </div>
 )
 
-const TableCell: React.FunctionComponent<{ icon?: React.ReactElement; color: string }> = props => (
-  <div styleName="table-cell" style={{ backgroundColor: props.color }}>
+const TableCell: React.FunctionComponent<{
+  icon?: React.ReactElement
+  color: string
+  borderColor: string
+}> = props => (
+  <div styleName="table-cell" style={{ backgroundColor: props.color, borderColor: props.borderColor }}>
     <div styleName="icon">{props.icon}</div>
-    <div styleName="content">{props.children}</div>
+    <div styleName="content" style={{ borderColor: props.borderColor }}>
+      {props.children}
+    </div>
   </div>
 )
