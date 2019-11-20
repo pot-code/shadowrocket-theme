@@ -52,6 +52,7 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
   handleExport = () => {
     const { scheme } = this.props
 
+    // TODO: optimize
     let result = EXPORT_PREFIX
     let pairs = Object.keys(this.props.scheme).reduce((acc, field) => {
       acc.push(`${field}=${encodeURIComponent(scheme[field])}`)
