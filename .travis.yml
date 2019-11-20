@@ -2,16 +2,14 @@ language: node_js
 node_js: stable
 
 script:
-  - echo "skipping tests"
-
-before_deploy:
   - npm run publish
 
 deploy:
   provider: pages
   skip_cleanup: true
-  github_token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
-  keep_history: true
+  github_token: $GH_TOKEN
   local_dir: docs
+  target_branch: gh-pages
+  edge: true
   on:
     branch: master
