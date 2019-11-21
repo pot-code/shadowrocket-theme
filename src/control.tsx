@@ -3,6 +3,7 @@ import { ChromePicker, ColorResult, ColorChangeHandler } from 'react-color'
 import { IoIosCheckmarkCircleOutline, IoIosHeart, IoMdClipboard, IoIosRefresh } from 'react-icons/io'
 
 import { throttle } from './util'
+import presets from './preset'
 
 import './app.less'
 import qrcode from './assets/qrcode.png'
@@ -20,6 +21,7 @@ interface IControlPanelProps {
 interface IControlPanelState {
   currentColor: string
   currentLabel: string
+  selectedScheme: string
   showTips: boolean
   result: string
 }
@@ -32,6 +34,7 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
       currentColor: props.scheme.NavigationBarColor,
       currentLabel: 'NavigationBarColor',
       showTips: false,
+      selectedScheme: '',
       result: ''
     }
   }
@@ -78,9 +81,23 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
     }
   }
 
+  handleResetScheme = () => {
+    this.props.resetScheme()
+    this.setState({ selectedScheme: '' })
+  }
+
+  selectPresetScheme = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const selected = e.currentTarget.dataset['scheme']
+
+    if (selected) {
+      this.props.setScheme(presets[selected])
+      this.setState({ selectedScheme: selected })
+    }
+  }
+
   render() {
     const { scheme } = this.props
-    const { currentColor, currentLabel, showTips } = this.state
+    const { currentColor, currentLabel, showTips, selectedScheme } = this.state
 
     return (
       <div styleName="panels">
@@ -96,13 +113,25 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
           ))}
         </div>
         <div styleName="sidebar">
+          <div styleName="pallette">
+            {Object.keys(presets).map(sc => (
+              <div
+                data-scheme={sc}
+                key={sc}
+                onClick={this.selectPresetScheme}
+                title={sc}
+                styleName={'swatch' + (selectedScheme === sc ? ' selected' : '')}
+                style={{ backgroundColor: presets[sc].NavigationBarColor }}
+              />
+            ))}
+          </div>
           <ChromePicker color={currentColor} onChange={this.onPickerColorChange} />
           <div styleName="export">
             <a styleName="button" onClick={this.handleExport} onCopy={this.handleExportCopy}>
               <IoMdClipboard />
               <span styleName="label">导出</span>
             </a>
-            <a styleName="button warning" onClick={this.props.resetScheme as React.MouseEventHandler}>
+            <a styleName="button warning" onClick={this.handleResetScheme}>
               <IoIosRefresh />
               <span styleName="label">重置</span>
             </a>

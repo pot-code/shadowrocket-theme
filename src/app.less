@@ -1,5 +1,12 @@
 @import (css) url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
+.shortTransition(@key) {
+  transition: @key 0.3s ease;
+}
+.longTransition(@key) {
+  transition: @key 0.6s ease;
+}
+
 @sizes: {
   mobile: 320px;
   tablet: 768px;
@@ -76,7 +83,7 @@
       width: 100%;
       opacity: 0.5;
       box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.6);
-      transition: opacity 0.6s ease;
+      .longTransition(opacity);
     }
 
     &:hover::after {
@@ -284,6 +291,30 @@
     align-items: center;
     flex-direction: column;
 
+    .pallette {
+      // background-color: rgba(255, 255, 255, 0.33);
+      // border-radius: 8px;
+      // border-bottom: 1px solid red;
+      margin-bottom: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+
+      .swatch {
+        width: 16px;
+        height: 16px;
+        border-radius: 2px;
+        margin: 8px;
+        cursor: pointer;
+        border: 1px solid;
+        border-color: transparent;
+        .shortTransition(border-color);
+
+        &.selected {
+          border-color: #4fb0fd;
+        }
+      }
+    }
     .export {
       display: flex;
       justify-content: space-around;
@@ -297,7 +328,9 @@
         text-align: center;
         margin: 24px auto 0;
         border-radius: 4px;
-        transition: background-color 0.3s ease, color 0.3s ease, top 0.3s ease;
+        .shortTransition(background-color);
+        .shortTransition(color);
+        .shortTransition(top);
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -339,7 +372,7 @@
       padding: 4px 16px;
       border-radius: 4px;
       opacity: 0;
-      transition: opacity 0.3s ease;
+      .shortTransition(opacity);
 
       &.show {
         opacity: 1;
@@ -356,7 +389,7 @@
     margin-bottom: 12px;
     border-radius: 4px;
     position: relative;
-    transition: right 0.3s ease;
+    .shortTransition(right);
     right: 0;
 
     &.selected {
@@ -380,7 +413,7 @@
       width: 100%;
       border-radius: 4px;
       box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.6);
-      transition: opacity 0.6s ease;
+      .longTransition(opacity);
       opacity: 0;
     }
     &:last-child {
@@ -429,6 +462,10 @@
     .sidebar {
       margin-top: 16px;
       width: 90%;
+
+      .pallette {
+        justify-content: center;
+      }
     }
     .meters {
       margin-right: 0;
