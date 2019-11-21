@@ -148,11 +148,11 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#BCF8FF'
+                color: '#ef5a2c'
               }}
             >
               <IoIosHeart />
-              <span style={{ margin: '0 8px', fontWeight: 700 }}>请随意捐赠</span>
+              <span style={{ margin: '0 8px' }}>请随意捐赠</span>
               <IoIosHeart />
             </p>
             <img src={qrcode} style={{ width: '233px', minHeight: '233px' }} />

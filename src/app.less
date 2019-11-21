@@ -1,11 +1,7 @@
 @import (css) url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
-.shortTransition(@key) {
-  transition: @key 0.3s ease;
-}
-.longTransition(@key) {
-  transition: @key 0.6s ease;
-}
+@shortTransition: 0.3s ease;
+@longTransition: 0.6s ease;
 
 @sizes: {
   mobile: 320px;
@@ -83,7 +79,7 @@
       width: 100%;
       opacity: 0.5;
       box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.6);
-      .longTransition(opacity);
+      transition: opacity @longTransition;
     }
 
     &:hover::after {
@@ -286,7 +282,7 @@
     flex-shrink: 0;
     padding: 16px;
     border-radius: 8px;
-    background-color: rgba(63, 81, 181, 0.29);
+    background-color: rgba(255, 255, 255, 0.33);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -308,7 +304,7 @@
         cursor: pointer;
         border: 1px solid;
         border-color: transparent;
-        .shortTransition(border-color);
+        transition: border-color @shortTransition;
 
         &.selected {
           border-color: #4fb0fd;
@@ -328,14 +324,10 @@
         text-align: center;
         margin: 24px auto 0;
         border-radius: 4px;
-        .shortTransition(background-color);
-        .shortTransition(color);
-        .shortTransition(top);
+        transition: background-color @shortTransition, color @shortTransition;
         cursor: pointer;
         display: flex;
         align-items: center;
-        position: relative;
-        top: 0;
         // 导致 copy 事件不正常
         // user-select: none;
         text-decoration: none;
@@ -372,7 +364,7 @@
       padding: 4px 16px;
       border-radius: 4px;
       opacity: 0;
-      .shortTransition(opacity);
+      transition: opacity @shortTransition;
 
       &.show {
         opacity: 1;
@@ -389,7 +381,7 @@
     margin-bottom: 12px;
     border-radius: 4px;
     position: relative;
-    .shortTransition(right);
+    transition: right @shortTransition;
     right: 0;
 
     &.selected {
@@ -413,7 +405,7 @@
       width: 100%;
       border-radius: 4px;
       box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.6);
-      .longTransition(opacity);
+      transition: opacity @longTransition;
       opacity: 0;
     }
     &:last-child {
