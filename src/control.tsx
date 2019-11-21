@@ -126,7 +126,7 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
               <span style={{ margin: '0 8px', fontWeight: 700 }}>请随意捐赠</span>
               <IoIosHeart />
             </p>
-            <img src={qrcode} style={{ width: '233px', height: '233.66px' }} />
+            <img src={qrcode} style={{ width: '233px', minHeight: '233px' }} />
           </div>
         </div>
       </div>
