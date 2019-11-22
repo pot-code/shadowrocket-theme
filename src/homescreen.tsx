@@ -25,7 +25,7 @@ export const HomeScreen: React.FunctionComponent<{ scheme: { [key: string]: stri
     TableBackgroundColor,
     TableCellBackgroundColor,
     TextLabelTextColor,
-    DetaillLabelTextColor,
+    DetailLabelTextColor,
     ButtonIconColor,
     ButtonNormalColor,
     PingSuccessTextColor,
@@ -48,7 +48,7 @@ export const HomeScreen: React.FunctionComponent<{ scheme: { [key: string]: stri
             {...{
               ButtonIconColor,
               TextLabelTextColor,
-              DetaillLabelTextColor,
+              DetailLabelTextColor,
               TableCellBackgroundColor,
               TableSeparatorColor
             }}
@@ -65,7 +65,7 @@ export const HomeScreen: React.FunctionComponent<{ scheme: { [key: string]: stri
                   {...{
                     ButtonIconColor,
                     TextLabelTextColor,
-                    DetaillLabelTextColor,
+                    DetailLabelTextColor,
                     TableCellBackgroundColor,
                     TableSeparatorColor,
                     DefaultDotColor
@@ -112,7 +112,7 @@ const Navigation: React.FunctionComponent<{
 const Actions: React.FunctionComponent<{
   ButtonIconColor: string
   TextLabelTextColor: string
-  DetaillLabelTextColor: string
+  DetailLabelTextColor: string
   TableSeparatorColor: string
   TableCellBackgroundColor: string
 }> = props => (
@@ -134,7 +134,7 @@ const Actions: React.FunctionComponent<{
     >
       <div styleName="router">
         <span style={{ color: props.TextLabelTextColor }}>全局路由</span>
-        <div styleName="config" style={{ color: props.DetaillLabelTextColor }}>
+        <div styleName="config" style={{ color: props.DetailLabelTextColor }}>
           <span style={{ marginRight: '4px' }}>配置</span>
           <FiChevronRight />
         </div>
@@ -154,7 +154,7 @@ const Server: React.FunctionComponent<{
   delay: string
   ButtonIconColor: string
   TextLabelTextColor: string
-  DetaillLabelTextColor: string
+  DetailLabelTextColor: string
   PingColor: string
   TableCellBackgroundColor: string
   TableSeparatorColor: string
@@ -186,7 +186,7 @@ const Server: React.FunctionComponent<{
           <p styleName="address" style={{ color: props.TextLabelTextColor }}>
             {props.address}
           </p>
-          <p styleName="type" style={{ color: props.DetaillLabelTextColor }}>
+          <p styleName="type" style={{ color: props.DetailLabelTextColor }}>
             shadowsocks
           </p>
         </div>

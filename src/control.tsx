@@ -148,7 +148,7 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#ef5a2c'
+                color: '#FFFFFF'
               }}
             >
               <IoIosHeart />

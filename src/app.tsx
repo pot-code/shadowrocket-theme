@@ -22,7 +22,7 @@ const defaultScheme = {
   TableCellBackgroundColor: '#FFFFFF',
   TableSeparatorColor: '#E0E0E0',
   TextLabelTextColor: '#000000',
-  DetaillLabelTextColor: '#C9C9C9',
+  DetailLabelTextColor: '#C9C9C9',
   ButtonIconColor: '#1D74BE',
   ButtonNormalColor: '#FFFFFF',
   PingSuccessTextColor: '#59A46F',
