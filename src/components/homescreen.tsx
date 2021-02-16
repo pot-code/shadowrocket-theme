@@ -1,10 +1,9 @@
-import * as React from 'react'
 import { AiOutlineScan, AiOutlinePlus, AiOutlineHome, AiOutlineSetting, AiOutlineFolderOpen } from 'react-icons/ai'
 import { IoIosPulse, IoIosRocket } from 'react-icons/io'
 import { GiShipWheel, GiSpeedometer, GiInfo } from 'react-icons/gi'
 import { FiChevronRight } from 'react-icons/fi'
 
-import './app.less'
+import styles from './homescreen.module.scss'
 
 const SERVERS = [
   ['Timeout', '超时'],
@@ -13,7 +12,7 @@ const SERVERS = [
   ['Vultr', '23ms']
 ]
 
-export const HomeScreen: React.FunctionComponent<{ scheme: { [key: string]: string } }> = props => {
+export const HomeScreen: React.FunctionComponent<{ scheme: Schema }> = props => {
   const {
     NavigationBarColor,
     NavigationBarTextColor,
@@ -34,8 +33,8 @@ export const HomeScreen: React.FunctionComponent<{ scheme: { [key: string]: stri
   } = props.scheme
 
   return (
-    <div styleName="homescreen">
-      <div styleName="screen" style={{ backgroundColor: TableBackgroundColor }}>
+    <div className={styles.homescreen}>
+      <div className={styles.screen} style={{ backgroundColor: TableBackgroundColor }}>
         <Navigation
           {...{
             NavigationBarColor,
@@ -43,7 +42,7 @@ export const HomeScreen: React.FunctionComponent<{ scheme: { [key: string]: stri
             ButtonNormalColor
           }}
         />
-        <div styleName="main">
+        <div className={styles.main}>
           <Actions
             {...{
               ButtonIconColor,
@@ -53,11 +52,11 @@ export const HomeScreen: React.FunctionComponent<{ scheme: { [key: string]: stri
               TableSeparatorColor
             }}
           />
-          <div styleName="section">
-            <div styleName="label">
+          <div className={styles.section}>
+            <div className={styles.label}>
               <span>服务器节点</span>
             </div>
-            <div styleName="servers">
+            <div className={styles.servers}>
               {SERVERS.map((val, index) => (
                 <Server
                   delay={val[1]}
@@ -77,9 +76,9 @@ export const HomeScreen: React.FunctionComponent<{ scheme: { [key: string]: stri
               ))}
             </div>
           </div>
-          <p styleName="tip">圆点代表默认节点</p>
+          <p className={styles.tip}>圆点代表默认节点</p>
         </div>
-        <div styleName="footer">
+        <div className={styles.footer}>
           <TabBar
             {...{
               TabBarColor,
@@ -99,9 +98,9 @@ const Navigation: React.FunctionComponent<{
   NavigationBarTextColor: string
   ButtonNormalColor: string
 }> = props => (
-  <div styleName="navigation" style={{ backgroundColor: props.NavigationBarColor }}>
-    <div styleName="status-bar"></div>
-    <div styleName="title" style={{ color: props.NavigationBarTextColor }}>
+  <div className={styles.navigation} style={{ backgroundColor: props.NavigationBarColor }}>
+    <div className={styles['status-bar']}></div>
+    <div className={styles.title} style={{ color: props.NavigationBarTextColor }}>
       <AiOutlineScan fontSize="26px" color={props.ButtonNormalColor} />
       <span style={{ fontSize: '18px', fontWeight: 400 }}>Shadowrocket</span>
       <AiOutlinePlus fontSize="26px" color={props.ButtonNormalColor} />
@@ -116,15 +115,15 @@ const Actions: React.FunctionComponent<{
   TableSeparatorColor: string
   TableCellBackgroundColor: string
 }> = props => (
-  <div styleName="actions">
+  <div className={styles.actions}>
     <TableCell
       icon={<IoIosRocket color={props.ButtonIconColor} />}
       color={props.TableCellBackgroundColor}
       borderColor={props.TableSeparatorColor}
     >
-      <div styleName="connection">
+      <div className={styles.connection}>
         <span style={{ color: props.TextLabelTextColor }}>已连接</span>
-        <div styleName="toggle" style={{ backgroundColor: props.ButtonIconColor }}></div>
+        <div className={styles.toggle} style={{ backgroundColor: props.ButtonIconColor }}></div>
       </div>
     </TableCell>
     <TableCell
@@ -132,9 +131,9 @@ const Actions: React.FunctionComponent<{
       color={props.TableCellBackgroundColor}
       borderColor={props.TableSeparatorColor}
     >
-      <div styleName="router">
+      <div className={styles.router}>
         <span style={{ color: props.TextLabelTextColor }}>全局路由</span>
-        <div styleName="config" style={{ color: props.DetailLabelTextColor }}>
+        <div className={styles.config} style={{ color: props.DetailLabelTextColor }}>
           <span style={{ marginRight: '4px' }}>配置</span>
           <FiChevronRight />
         </div>
@@ -166,9 +165,9 @@ const Server: React.FunctionComponent<{
 
   if (props.selected) {
     icon = (
-      <div styleName="selected">
+      <div className={styles.selected}>
         <div
-          styleName="dot"
+          className={styles.dot}
           style={{
             backgroundColor: props.DefaultDotColor
           }}
@@ -181,17 +180,17 @@ const Server: React.FunctionComponent<{
   }
   return (
     <TableCell icon={icon} color={props.TableCellBackgroundColor} borderColor={props.TableSeparatorColor}>
-      <div styleName="server">
-        <div styleName="host">
-          <p styleName="address" style={{ color: props.TextLabelTextColor }}>
+      <div className={styles.server}>
+        <div className={styles.host}>
+          <p className={styles.address} style={{ color: props.TextLabelTextColor }}>
             {props.address}
           </p>
-          <p styleName="type" style={{ color: props.DetailLabelTextColor }}>
+          <p className={styles.type} style={{ color: props.DetailLabelTextColor }}>
             shadowsocks
           </p>
         </div>
-        <div styleName="status">
-          <span styleName="delay" style={{ color: props.PingColor }}>
+        <div className={styles.status}>
+          <span className={styles.delay} style={{ color: props.PingColor }}>
             {props.delay}
           </span>
           <GiInfo color={props.ButtonIconColor} fontSize="24px" />
@@ -208,7 +207,7 @@ const TabBar: React.FunctionComponent<{
   TabBarUnselectedColor: string
 }> = props => (
   <div
-    styleName="tab-bar"
+    className={styles['tab-bar']}
     style={{ borderTop: '1px solid', borderColor: props.TabBarBorderColor, backgroundColor: props.TabBarColor }}
   >
     <TabBarButton icon={<AiOutlineHome />} text="首页" color={props.TabBarSelectedColor} />
@@ -219,9 +218,9 @@ const TabBar: React.FunctionComponent<{
 )
 
 const TabBarButton: React.FunctionComponent<{ icon: React.ReactElement; text: string; color: string }> = props => (
-  <div styleName="button" style={{ color: props.color }}>
-    <span styleName="icon">{props.icon}</span>
-    <span styleName="text">{props.text}</span>
+  <div className={styles.button} style={{ color: props.color }}>
+    <span className={styles.icon}>{props.icon}</span>
+    <span className={styles.text}>{props.text}</span>
   </div>
 )
 
@@ -230,9 +229,9 @@ const TableCell: React.FunctionComponent<{
   color: string
   borderColor: string
 }> = props => (
-  <div styleName="table-cell" style={{ backgroundColor: props.color, borderColor: props.borderColor }}>
-    <div styleName="icon">{props.icon}</div>
-    <div styleName="content" style={{ borderColor: props.borderColor }}>
+  <div className={styles['table-cell']} style={{ backgroundColor: props.color, borderColor: props.borderColor }}>
+    <div className={styles.icon}>{props.icon}</div>
+    <div className={styles.content} style={{ borderColor: props.borderColor }}>
       {props.children}
     </div>
   </div>

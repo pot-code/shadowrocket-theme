@@ -1,0 +1,30 @@
+@use '../styles/variables' as *;
+
+.app {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  margin: auto;
+}
+
+.mobile-tip {
+  display: none;
+  background-color: #ffffff;
+  margin: 8px;
+  padding: 4px;
+  border-radius: 4px;
+  color: #de5a25;
+}
+
+@media (max-width: map-get($sizes, 'tablet')) {
+  .app {
+    flex-direction: column;
+    width: 100%;
+  }
+  .mobile-tip {
+    display: block;
+  }
+  .homescreen {
+    margin-top: 16px;
+  }
+}

@@ -85,3 +85,4 @@ node_modules/
 public/
 docs/report.html
 # End of https://www.gitignore.io/api/node,macos,visualstudiocode
+.next/

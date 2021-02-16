@@ -1,0 +1,219 @@
+@use '../styles/variables' as *;
+
+@keyframes wiggle {
+  0% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(-4px, -4px);
+  }
+  40% {
+    transform: translate(4px, -4px);
+  }
+  60% {
+    transform: translate(8px, 4px);
+  }
+  80% {
+    transform: translate(4px, 4px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.panels {
+  flex-shrink: 0;
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .meters {
+    font-family: 'Roboto';
+    margin-right: 32px;
+    padding: 14px;
+    background-color: rgba(255, 255, 255, 0.33);
+    border-radius: 8px;
+  }
+  .sidebar {
+    flex-shrink: 0;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.33);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .pallette {
+      // background-color: rgba(255, 255, 255, 0.33);
+      // border-radius: 8px;
+      // border-bottom: 1px solid red;
+      margin-bottom: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+
+      .swatch {
+        width: 16px;
+        height: 16px;
+        border-radius: 2px;
+        margin: 8px;
+        cursor: pointer;
+        border: 1px solid;
+        border-color: transparent;
+        transition: border-color $shortTransition;
+
+        &.selected {
+          border-color: #4fb0fd;
+        }
+      }
+    }
+    .export {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+
+      .button {
+        line-height: 24px;
+        padding: 4px 16px;
+        background-color: #4fb0fd;
+        color: #f5feff;
+        text-align: center;
+        margin: 24px auto 0;
+        border-radius: 4px;
+        transition: background-color $shortTransition, color $shortTransition;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        // 导致 copy 事件不正常
+        // user-select: none;
+        text-decoration: none;
+
+        &:hover {
+          background-color: darken(#4fb0fd, 10%);
+        }
+        &:active {
+          background-color: darken(#4fb0fd, 20%);
+        }
+        &.warning {
+          background-color: #f1d040;
+          color: #008e12;
+        }
+        &.warning:hover {
+          background-color: darken(#f1d040, 10%);
+        }
+        &.warning:active {
+          background-color: darken(#f1d040, 20%);
+        }
+
+        .label {
+          margin-left: 2px;
+        }
+      }
+    }
+    .tips {
+      display: flex;
+      align-items: center;
+      margin: 8px 0;
+      justify-content: center;
+      color: green;
+      background-color: #f1f1f1;
+      padding: 4px 16px;
+      border-radius: 4px;
+      opacity: 0;
+      transition: opacity $shortTransition;
+
+      &.show {
+        opacity: 1;
+      }
+    }
+    .donate {
+    }
+  }
+  .meter {
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffffff;
+    margin-bottom: 12px;
+    border-radius: 4px;
+    position: relative;
+    transition: right $shortTransition;
+    right: 0;
+
+    &.selected {
+      right: 24px;
+
+      .label {
+        color: #333333;
+      }
+      animation: wiggle 6s linear infinite;
+    }
+    &.selected::after {
+      opacity: 1;
+    }
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      border-radius: 4px;
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.6);
+      transition: opacity $longTransition;
+      opacity: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    .label {
+      user-select: none;
+      color: #8c8c8c;
+      margin-right: 16px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .indicator {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      overflow: hidden;
+
+      .sample {
+        border: 1px solid #dedede;
+        flex-shrink: 0;
+        height: 14px;
+        width: 14px;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+      .hex {
+        color: #000000;
+      }
+    }
+  }
+}
+
+@media (max-width: map-get($sizes, 'tablet')) {
+  .panels {
+    flex-direction: column;
+    margin-top: 16px;
+
+    .sidebar {
+      margin-top: 16px;
+      width: 90%;
+      background-color: transparent;
+
+      .pallette {
+        justify-content: center;
+      }
+    }
+    .meters {
+      margin-right: 0;
+      width: 80%;
+      background-color: transparent;
+    }
+  }
+}

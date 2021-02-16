@@ -1,19 +1,20 @@
-import * as React from 'react'
+import React from 'react'
 import { ChromePicker, ColorResult, ColorChangeHandler } from 'react-color'
 import { IoIosCheckmarkCircleOutline, IoIosHeart, IoMdClipboard, IoIosRefresh } from 'react-icons/io'
+import Image from 'next/image'
+import cx from 'classnames'
 
-import { throttle } from './util'
-import presets from './preset'
+import { throttle } from '../lib/util'
+import presets from '../lib/preset'
 
-import './app.less'
-import qrcode from './assets/qrcode.png'
+import styles from './control.module.scss'
 
 const FRAME_RATE = ~~(1000 / 60)
 const EXPORT_PREFIX = 'shadowrocket://color?'
 const EXPORT_SUFFIX = '&v=1.0'
 
 interface IControlPanelProps {
-  scheme: { [key: string]: string }
+  scheme: Schema
   setScheme: Function
   resetScheme: Function
 }
@@ -100,8 +101,8 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
     const { currentColor, currentLabel, showTips, selectedScheme } = this.state
 
     return (
-      <div styleName="panels">
-        <div styleName="meters">
+      <div className={styles.panels}>
+        <div className={styles.meters}>
           {Object.keys(scheme).map(field => (
             <ColorMeter
               field={field}
@@ -112,35 +113,41 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
             />
           ))}
         </div>
-        <div styleName="sidebar">
-          <div styleName="pallette">
+        <div className={styles.sidebar}>
+          <div className={styles.pallette}>
             {Object.keys(presets).map(sc => (
               <div
                 data-scheme={sc}
                 key={sc}
                 onClick={this.selectPresetScheme}
                 title={sc}
-                styleName={'swatch' + (selectedScheme === sc ? ' selected' : '')}
+                className={cx(styles.swatch, {
+                  [styles.selected]: selectedScheme === sc
+                })}
                 style={{ backgroundColor: presets[sc].NavigationBarColor }}
               />
             ))}
           </div>
           <ChromePicker color={currentColor} onChange={this.onPickerColorChange} />
-          <div styleName="export">
-            <a styleName="button" onClick={this.handleExport} onCopy={this.handleExportCopy}>
+          <div className={styles.export}>
+            <a className={styles.button} onClick={this.handleExport} onCopy={this.handleExportCopy}>
               <IoMdClipboard />
-              <span styleName="label">导出</span>
+              <span className={styles.label}>导出</span>
             </a>
-            <a styleName="button warning" onClick={this.handleResetScheme}>
+            <a className={cx(styles.button, styles.warning)} onClick={this.handleResetScheme}>
               <IoIosRefresh />
-              <span styleName="label">重置</span>
+              <span className={styles.label}>重置</span>
             </a>
           </div>
-          <p styleName={'tips' + (showTips ? ' show' : '')}>
+          <p
+            className={cx(styles.tips, {
+              [styles.show]: showTips
+            })}
+          >
             <IoIosCheckmarkCircleOutline />
             <span style={{ marginLeft: '8px' }}>导出到剪切板</span>
           </p>
-          <div styleName="donate">
+          <div className={styles.donate}>
             <p
               style={{
                 marginTop: '0',
@@ -155,7 +162,7 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
               <span style={{ margin: '0 8px' }}>请随意捐赠</span>
               <IoIosHeart />
             </p>
-            <img src={qrcode} style={{ width: '233px', minHeight: '233px' }} />
+            <Image src="/images/qrcode.png" width="233" height="233" />
           </div>
         </div>
       </div>
@@ -170,14 +177,16 @@ const ColorMeter: React.FunctionComponent<{
   clickHandler: Function
 }> = props => (
   <div
-    styleName={'meter' + (props.selected ? ' selected' : '')}
+    className={cx(styles.meter, {
+      [styles.selected]: props.selected
+    })}
     onClick={event => {
       props.clickHandler(event, props.color, props.field)
     }}
   >
-    <span styleName="label">{props.field}</span>
-    <div styleName="indicator">
-      <div styleName="sample" style={{ backgroundColor: props.color }}></div>
+    <span className={styles.label}>{props.field}</span>
+    <div className={styles.indicator}>
+      <div className={styles.sample} style={{ backgroundColor: props.color }}></div>
       {/* <span styleName="hex">{props.color}</span> */}
     </div>
   </div>
