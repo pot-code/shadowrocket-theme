@@ -1,0 +1,40 @@
+.actions {
+  background-color: #ffffff;
+
+  .connection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .toggle {
+      width: 50px;
+      height: 30px;
+      background-color: #e9e9eb;
+      border-radius: 15px;
+      position: relative;
+
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        margin: 2px;
+        height: 26px;
+        width: 26px;
+        border-radius: 50%;
+        background-color: #ffffff;
+      }
+    }
+  }
+  .router {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .config {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

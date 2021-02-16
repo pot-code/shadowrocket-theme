@@ -1,0 +1,29 @@
+.table-cell {
+  display: flex;
+  align-items: center;
+
+  &:first-child {
+    border-top: 1px solid;
+  }
+  &:last-child {
+    border-bottom: 1px solid;
+
+    .content {
+      border: none;
+    }
+  }
+  .icon {
+    font-size: 24px;
+    height: 26px;
+    width: 26px;
+    margin: 8px;
+    margin-left: 16px;
+    flex-shrink: 0;
+  }
+  .content {
+    flex-grow: 1;
+    padding: 8px 12px 8px 0;
+    margin-left: 12px;
+    border-bottom: 1px solid;
+  }
+}

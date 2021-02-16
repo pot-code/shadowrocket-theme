@@ -1,0 +1,18 @@
+.tab-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 32px 18px;
+
+  .button {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+
+    .icon {
+      font-size: 28px;
+    }
+    .text {
+      font-size: 12px;
+    }
+  }
+}

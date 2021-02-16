@@ -1,17 +1,17 @@
 import React from 'react'
+// import Canvas from 'canvas'
+import cx from 'classnames'
 import { ChromePicker, ColorResult, ColorChangeHandler } from 'react-color'
 import { IoIosCheckmarkCircleOutline, IoIosHeart, IoMdClipboard, IoIosRefresh } from 'react-icons/io'
-import Image from 'next/image'
-import cx from 'classnames'
+// import Image from 'next/image'
 
-import { throttle } from '../lib/util'
-import presets from '../lib/preset'
+import { ColorMeter } from './ColorMeter'
 
-import styles from './control.module.scss'
+import { throttle } from '../../lib/util'
+import presets from '../../lib/preset'
+import { FRAME_RATE, EXPORT_PREFIX, EXPORT_SUFFIX } from '../../lib/constants'
 
-const FRAME_RATE = ~~(1000 / 60)
-const EXPORT_PREFIX = 'shadowrocket://color?'
-const EXPORT_SUFFIX = '&v=1.0'
+import styles from './Control.module.scss'
 
 interface IControlPanelProps {
   scheme: Schema
@@ -103,7 +103,7 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
     return (
       <div className={styles.panels}>
         <div className={styles.meters}>
-          {Object.keys(scheme).map(field => (
+          {Object.keys(scheme).map((field) => (
             <ColorMeter
               field={field}
               key={field}
@@ -115,7 +115,7 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
         </div>
         <div className={styles.sidebar}>
           <div className={styles.pallette}>
-            {Object.keys(presets).map(sc => (
+            {Object.keys(presets).map((sc) => (
               <div
                 data-scheme={sc}
                 key={sc}
@@ -162,32 +162,10 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
               <span style={{ margin: '0 8px' }}>请随意捐赠</span>
               <IoIosHeart />
             </p>
-            <Image src="/images/qrcode.png" width="233" height="233" />
+            <img src="/images/qrcode.png" width="233" height="233" />
           </div>
         </div>
       </div>
     )
   }
 }
-
-const ColorMeter: React.FunctionComponent<{
-  color: string
-  field: string
-  selected: boolean
-  clickHandler: Function
-}> = props => (
-  <div
-    className={cx(styles.meter, {
-      [styles.selected]: props.selected
-    })}
-    onClick={event => {
-      props.clickHandler(event, props.color, props.field)
-    }}
-  >
-    <span className={styles.label}>{props.field}</span>
-    <div className={styles.indicator}>
-      <div className={styles.sample} style={{ backgroundColor: props.color }}></div>
-      {/* <span styleName="hex">{props.color}</span> */}
-    </div>
-  </div>
-)

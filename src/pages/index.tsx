@@ -1,14 +1,11 @@
 import { useState, useCallback } from 'react'
 import { GiInfo } from 'react-icons/gi'
 
-import { ControlPanel } from '../components/control'
-import { HomeScreen } from '../components/homescreen'
+import { ControlPanel } from '../components/Control/Control'
+import { HomeScreen } from '../components/Homescreen/Homescreen'
 // import { throttle } from '../lib/util'
 
 import styles from './index.module.scss'
-
-const STORAGE_KEY = 'sr_scheme'
-const SAVE_INTERVAL = 1e3 * 3 // 10s
 
 const defaultScheme: Schema = {
   NavigationBarColor: '#1D74BE',

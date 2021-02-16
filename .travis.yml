@@ -1,15 +1,19 @@
 language: node_js
 node_js: stable
 
+cache:
+  directories:
+    - node_modules
+
 script:
-  - npm run publish
+  - npm run build
+  - npm run export
 
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GH_TOKEN
-  local_dir: docs
+  local_dir: out
   target_branch: gh-pages
-  edge: true
   on:
     branch: master

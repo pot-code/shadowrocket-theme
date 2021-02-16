@@ -1,0 +1,18 @@
+.navigation {
+  height: 12%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .status-bar {
+    height: 50%;
+  }
+  .title {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    padding: 0 12px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+}
