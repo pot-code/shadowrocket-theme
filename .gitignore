@@ -82,7 +82,6 @@ node_modules/
 # org mode files
 *.org
 .vscode/
-public/
 docs/report.html
 # End of https://www.gitignore.io/api/node,macos,visualstudiocode
 .next/
