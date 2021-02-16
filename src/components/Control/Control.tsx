@@ -162,7 +162,7 @@ export class ControlPanel extends React.PureComponent<IControlPanelProps, IContr
               <span style={{ margin: '0 8px' }}>请随意捐赠</span>
               <IoIosHeart />
             </p>
-            <img src="/images/qrcode.png" width="233" height="233" />
+            <img src={`${process.env.PUBLIC_URL}/images/qrcode.png`} width="233" height="233" />
           </div>
         </div>
       </div>
